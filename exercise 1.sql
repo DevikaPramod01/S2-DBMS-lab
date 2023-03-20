@@ -24,7 +24,7 @@ alter table participated modify damage_amt numeric(7,2);
 
 insert into person (driver_id,name,address,gender)values("101","akshay","ak house","m"),("202","anusha","an vila","f"),("303","catherine","ca house","f"),("401","kiran","kk nivas","m"),("451","raj","raj nivas","m");
 
-insert into accident(report_no,date)values("4563","2019-11-28"),("5671","2022-09-12"),("8230","2005-03-11"),("9056","2023-07-14"),("5633","2005-05-19");
+insert into vehicle(license,model,year)values("1001","ma2011","2011"),("6002","na2009","2009"),("3567","be1999","1999"),("5008","au2014","2014"),("7622","be2000","2000");
 
 insert into accident(report_number,date)values("4563","2014-11-28"),("5671","2022-09-12"),("8230","2005-03-11"),("9056","2019-07-14"),("5633","2005-05-19");
 
