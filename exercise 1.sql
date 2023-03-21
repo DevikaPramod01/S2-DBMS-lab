@@ -32,7 +32,3 @@ insert into owns(driver_id,license)values("101","1001"),("202","6002"),("303","3
 
 insert into participated (report_no ,license ,driver_id ,damage_amt)values("4563","1001","101","15650.55"),("5671","6002","202","09830.75"),("8230","3567","303","24892.88"),("9056","5008","401","08450.90"),("5633","7622","451","06500.25");
 
-select * from person where name like "a%";
-select * from participated where damage_amt>10000;
-select * from accident where date between "2021-01-01" and "2023-12-31";
-
