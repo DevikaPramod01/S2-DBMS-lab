@@ -1,0 +1,29 @@
+create database product;
+use product;
+ create table product(pdtid int,pname varchar(20),price float,qtyinstock bigint,primary key(pdtid));
+ create table sales(salesid int,deliveryaddress varchar(25),primary key(salesid));
+ create table salesitem(salesid int,pdtid int,qty int);
+ 
+ desc product;
+ desc sales;
+ desc salesitem;
+
+alter table salesitem add constraint foreign key salesitem(salesid) references sales(salesid);
+
+alter table salesitem add constraint foreign key salesitem(pdtid) references product(pdtid);
+
+insert into product values(1,'john',400,500),(2,'mariya',200,600),(3,'gaya',100,130);
+insert into sales values(111,'Johns villah'),(222,'Mariya bhavan'),(333,'jingle house');
+insert into salesitem values(111,1,200),(222,2,300),(333,3,10);
+
+create trigger updateonavailablequantity
+AFTER INSERT
+ON salesitem 
+FOR each row
+UPDATE product SET
+product.qty =product.qty-new.qty
+where product.pdtid=new.pdtid; 
+ 
+select * from product;
+select * from sales;
+select * from salesitem;
