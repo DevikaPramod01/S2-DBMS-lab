@@ -1,29 +1,25 @@
-create database product;
-use product;
- create table product(pdtid int,pname varchar(20),price float,qtyinstock bigint,primary key(pdtid));
- create table sales(salesid int,deliveryaddress varchar(25),primary key(salesid));
- create table salesitem(salesid int,pdtid int,qty int);
- 
- desc product;
- desc sales;
- desc salesitem;
 
-alter table salesitem add constraint foreign key salesitem(salesid) references sales(salesid);
 
-alter table salesitem add constraint foreign key salesitem(pdtid) references product(pdtid);
+create database p;
+use p;
 
-insert into product values(1,'john',400,500),(2,'mariya',200,600),(3,'gaya',100,130);
-insert into sales values(111,'Johns villah'),(222,'Mariya bhavan'),(333,'jingle house');
-insert into salesitem values(111,1,200),(222,2,300),(333,3,10);
+create table prd(pid int,pname varchar(20),price int,qtyinstk int,primary key(pid));
+create table sale(sid int,address varchar(10),primary key(sid));
+create table saleitem(Sid int,Pid int,qty int,primary key(Sid,Pid));
 
-create trigger updateonavailablequantity
-AFTER INSERT
-ON salesitem 
-FOR each row
-UPDATE product SET
-product.qty =product.qty-new.qty
-where product.pdtid=new.pdtid; 
- 
-select * from product;
-select * from sales;
-select * from salesitem;
+alter table saleitem add constraint foreign key saleitem(Pid) references prd(pid), add constraint foreign key (Sid) references sale(sid);
+
+DELIMITER //
+create trigger valupdate after insert on saleitem for each row 
+begin
+update prd,saleitem set prd.qtyinstk=prd.qtyinstk-saleitem.qty where saleitem.Pid=prd.pid;
+end //
+DELIMITER ;
+
+insert into prd values(1,"pen",30,100),(2,"soap",30,50);
+insert into sale values(5,"kollam"),(10,"tvm");
+insert into saleitem values(5,1,40),(10,2,10);
+
+select * from prd;
+select * from saleitem;
+
